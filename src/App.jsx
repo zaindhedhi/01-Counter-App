@@ -93,28 +93,77 @@
 
 // export default App
 
-import React, { useState } from 'react'
+// import React, { useState } from 'react'
+
+// const App = () => {
+// let [fruit , setFruit] = useState(['mango' , 'orange' , 'kiwi' , 'apple' , 'grapes'])
+
+
+
+
+
+
+
+//   return (
+//     <>
+//     <ul>
+//       {fruit.map((item , index)=>{
+//         return <li key={index}>{item}</li>
+//       })}
+
+//     </ul>
+    
+//     </>
+//   )
+// }
+
+// export default App
+
+
+import React, { useEffect, useState } from 'react'
 
 const App = () => {
-let [fruit , setFruit] = useState(['mango' , 'orange' , 'kiwi' , 'apple' , 'grapes'])
 
+const [user , setUser] = useState(null)
 
+useEffect(() => {
+  fetch('https://jsonplaceholder.typicode.com/users')
+  .then((res)=>{
+    return res.json()
+  })
+  .then((res)=>{
+    console.log(res)
+    setUser(res)
+  })
 
-
+ 
+}, [])
 
 
 
   return (
     <>
-    <ul>
-      {fruit.map((item , index)=>{
-        return <li key={index}>{item}</li>
-      })}
+    <h1>user agaye</h1>
+    {user ? user.map((item)=>{
+      return <p key={item.id}>{item.name}</p>
 
-    </ul>
+    }) : <h1>loading</h1>}
     
     </>
+
+
+
+
   )
 }
 
 export default App
+
+
+
+
+
+
+
+
+
